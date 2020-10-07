@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:2.3.1-gpu-jupyter
 
-ADD file:4b03b5f551e3fbdf47ec609712007327828f7530cc3455c43bbcdcaf449a75a9 in / 
+ADD 4b03b5f551e3fbdf47ec609712007327828f7530cc3455c43bbcdcaf449a75a9 in / 
 
 CMD ["bash"] 
 
@@ -18,10 +18,10 @@ RUN /bin/sh -c adduser --gecos '' --disabled-password coder &&   echo "coder ALL
 
 RUN /bin/sh -c ARCH="$(dpkg --print-architecture)" &&     curl -fsSL "https://github.com/boxboat/fixuid/releases/download/v0.4.1/fixuid-0.4.1-linux-$ARCH.tar.gz" | tar -C /usr/local/bin -xzf - &&     chown root:root /usr/local/bin/fixuid &&     chmod 4755 /usr/local/bin/fixuid &&     mkdir -p /etc/fixuid &&     printf "user: coder\ngroup: coder\n" > /etc/fixuid/config.yml
 
-COPY multi:78a849f414017248a4fc8f5a4e941432c80435bb44e3df498495e2143b876a29 in /tmp/ 
+COPY 78a849f414017248a4fc8f5a4e941432c80435bb44e3df498495e2143b876a29 in /tmp/ 
 
 
-COPY file:f89dace6fac61bcbe2a03cc661a85c1f6e646c6bec10a3f71fd7699b6ba03680 in /usr/bin/entrypoint.sh 
+COPY f89dace6fac61bcbe2a03cc661a85c1f6e646c6bec10a3f71fd7699b6ba03680 in /usr/bin/entrypoint.sh 
 
 RUN /bin/sh -c dpkg -i /tmp/code-server*$(dpkg --print-architecture).deb && rm /tmp/code-server*.deb
 
