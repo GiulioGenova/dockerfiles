@@ -5,7 +5,7 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 RUN pip install pandas
 
-RUN pip install psycopg2
+RUN pip install psycopg2-binary
 
 RUN pip install SQLAlchemy
 
