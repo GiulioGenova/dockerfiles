@@ -4,6 +4,10 @@ FROM ubuntu:18.04
 
 # instructions here https://www.tensorflow.org/install/pip
 
+RUN sudo apt-get update
+
+RUN sudo apt-get install wget
+
 # Add NVIDIA package repositories
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.1.243-1_amd64.deb
 RUN sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
