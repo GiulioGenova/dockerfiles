@@ -41,6 +41,10 @@ RUN pip3 install SQLAlchemy
 # Some TF tools expect a "python" binary
 RUN ln -s $(which python3) /usr/local/bin/python
 
+RUN echo $(which python3)
+
+RUN python --version
+
 # Options:
 #   tensorflow
 #   tensorflow-gpu
