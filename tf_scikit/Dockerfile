@@ -2,6 +2,7 @@ FROM tensorflow/tensorflow:2.3.1-gpu-jupyter
 
 
 # install python 3.8
+# https://stackoverflow.com/questions/63936578/docker-how-to-make-python-3-8-as-default
 RUN : \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -25,6 +26,8 @@ RUN pip install pandas
 RUN pip install psycopg2-binary
 
 RUN pip install SQLAlchemy
+
+RUN pip install tensorflow
 
 EXPOSE 8080
 
