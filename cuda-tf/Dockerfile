@@ -20,7 +20,7 @@ RUN : \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         python3.8-venv \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
+#    && rm -rf /var/lib/apt/lists/* \
     && :
 
 RUN python3.8 -m venv /venv
