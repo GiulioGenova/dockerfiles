@@ -2,38 +2,38 @@
 
 FROM ubuntu:18.04
 
-# instructions here https://www.tensorflow.org/install/pip
+# instructions here https://www.tensorflow.org/install/pip # not working
+# try here https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/10.1/ubuntu18.04-x86_64/base/Dockerfile
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gnupg2 curl ca-certificates && \
+    curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub | apt-key add - && \
+    echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
+    echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list && \
+    apt-get purge --autoremove -y curl \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y wget
+ENV CUDA_VERSION 10.1.243
+ENV CUDA_PKG_VERSION 10-1=$CUDA_VERSION-1
 
-RUN apt-get install -y gnupg2
+# For libraries in the cuda-compat-* package: https://docs.nvidia.com/cuda/eula/index.html#attachment-a
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    cuda-cudart-$CUDA_PKG_VERSION \
+    cuda-compat-10-1 \
+    && ln -s cuda-10.1 /usr/local/cuda && \
+    rm -rf /var/lib/apt/lists/*
 
-# Add NVIDIA package repositories
-RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.1.243-1_amd64.deb
-RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
-RUN dpkg -i cuda-repo-ubuntu1804_10.1.243-1_amd64.deb
-RUN apt-get update
-RUN wget http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64/nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
-RUN apt install -y ./nvidia-machine-learning-repo-ubuntu1804_1.0.0-1_amd64.deb
-RUN apt-get update
+# Required for nvidia-docker v1
+RUN echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf && \
+    echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 
-# Install NVIDIA driver
-RUN apt-get install -y --no-install-recommends nvidia-driver-450
-# Reboot. Check that GPUs are visible using the command: nvidia-smi
+ENV PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
+ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 
-# Install development and runtime libraries (~4GB)
-RUN apt-get install -y --no-install-recommends \
-    cuda-10-1 \
-    libcudnn7=7.6.5.32-1+cuda10.1  \
-    libcudnn7-dev=7.6.5.32-1+cuda10.1
-
-
-# Install TensorRT. Requires that libcudnn7 is installed above.
-RUN apt-get install -y --no-install-recommends libnvinfer6=6.0.1-1+cuda10.1 \
-    libnvinfer-dev=6.0.1-1+cuda10.1 \
-    libnvinfer-plugin6=6.0.1-1+cuda10.1
+# nvidia-container-runtime
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+ENV NVIDIA_REQUIRE_CUDA "cuda>=10.1 brand=tesla,driver>=396,driver<397 brand=tesla,driver>=410,driver<411 brand=tesla,driver>=418,driver<419"
 
 RUN apt install -y python3-dev python3-pip python3-venv
 
