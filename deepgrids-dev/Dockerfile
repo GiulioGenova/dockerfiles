@@ -50,6 +50,8 @@ ENV NVIDIA_REQUIRE_CUDA "cuda>=10.1 brand=tesla,driver>=396,driver<397 brand=tes
 # RUN python3.8 -m venv /venv
 # ENV PATH=/venv/bin:$PATH
 
+RUN apt install python3-pip
+
 RUN pip install tensorflow
 
 # SCI DEV KIT
