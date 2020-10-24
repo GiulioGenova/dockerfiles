@@ -50,7 +50,9 @@ ENV NVIDIA_REQUIRE_CUDA "cuda>=10.1 brand=tesla,driver>=396,driver<397 brand=tes
 # RUN python3.8 -m venv /venv
 # ENV PATH=/venv/bin:$PATH
 
-RUN apt-get install -y --no-install-recommends python3
+RUN add-apt-repository ppa:deadsnakes/ppa && apt update
+
+RUN apt-get install -y --no-install-recommends python3.8
 
 RUN apt-get install -y --no-install-recommends python3-pip
 
