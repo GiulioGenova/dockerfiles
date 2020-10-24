@@ -15,13 +15,13 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-pip
 
-RUN pip install pandas
+RUN pip3 install pandas
 
-RUN pip install psycopg2-binary
+RUN pip3 install psycopg2-binary
 
-RUN pip install SQLAlchemy
+RUN pip3 install SQLAlchemy
 
-RUN pip install tensorflow
+RUN pip3 install tensorflow
 
 EXPOSE 8080
 
