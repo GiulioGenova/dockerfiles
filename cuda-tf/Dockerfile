@@ -13,7 +13,7 @@ RUN : \
 # following instructions here https://github.com/cdr/code-server/blob/v3.5.0/doc/install.md
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-pip
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-pip python3.8-venv setuptools
 
 RUN pip3 install pandas
 
