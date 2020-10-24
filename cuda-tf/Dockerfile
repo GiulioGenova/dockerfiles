@@ -1,4 +1,4 @@
-FROM 10.1-cudnn7-runtime-ubuntu18.04
+FROM nvidia/10.1-cudnn7-runtime-ubuntu18.04
 
 RUN : \
     && apt-get update \
