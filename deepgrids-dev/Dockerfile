@@ -8,6 +8,8 @@ RUN apt-get update
 
 RUN apt-get install -y wget
 
+RUN apt-get install -y gnupg2
+
 # Add NVIDIA package repositories
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-repo-ubuntu1804_10.1.243-1_amd64.deb
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
