@@ -26,9 +26,10 @@ RUN : \
 RUN python3.8 -m venv /venv
 ENV PATH=/venv/bin:$PATH
 # following instructions here https://github.com/cdr/code-server/blob/v3.5.0/doc/install.md
-RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-pip build-essential
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-pip build-essential curl
+
+#RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 RUN pip3 install setuptools
 
@@ -45,21 +46,7 @@ RUN echo $(which python3)
 
 RUN python --version
 
-# Options:
-#   tensorflow
-#   tensorflow-gpu
-#   tf-nightly
-#   tf-nightly-gpu
-# Set --build-arg TF_PACKAGE_VERSION=1.11.0rc0 to install a specific version.
-# Installs the latest version by default.
-#ARG TF_PACKAGE=tensorflow
-#ARG TF_PACKAGE_VERSION=
-#RUN python3 -m pip install --no-cache-dir ${TF_PACKAGE}${TF_PACKAGE_VERSION:+==${TF_PACKAGE_VERSION}}
-
 RUN pip3 install tensorflow
-
-COPY bashrc /etc/bash.bashrc
-RUN chmod a+rwx /etc/bash.bashrc
 
 EXPOSE 8080
 
