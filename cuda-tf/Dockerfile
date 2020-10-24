@@ -26,7 +26,7 @@ RUN : \
 # following instructions here https://github.com/cdr/code-server/blob/v3.5.0/doc/install.md
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-pip
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-pip build-essential
 
 RUN pip3 install setuptools
 
@@ -46,9 +46,11 @@ RUN ln -s $(which python3) /usr/local/bin/python
 #   tf-nightly-gpu
 # Set --build-arg TF_PACKAGE_VERSION=1.11.0rc0 to install a specific version.
 # Installs the latest version by default.
-ARG TF_PACKAGE=tensorflow
-ARG TF_PACKAGE_VERSION=
-RUN python3 -m pip install --no-cache-dir ${TF_PACKAGE}${TF_PACKAGE_VERSION:+==${TF_PACKAGE_VERSION}}
+#ARG TF_PACKAGE=tensorflow
+#ARG TF_PACKAGE_VERSION=
+#RUN python3 -m pip install --no-cache-dir ${TF_PACKAGE}${TF_PACKAGE_VERSION:+==${TF_PACKAGE_VERSION}}
+
+RUN pip3 install tensorflow
 
 COPY bashrc /etc/bash.bashrc
 RUN chmod a+rwx /etc/bash.bashrc
