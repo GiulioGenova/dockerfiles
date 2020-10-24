@@ -14,7 +14,7 @@ RUN : \
 # following instructions here https://github.com/cdr/code-server/blob/v3.5.0/doc/install.md
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN sudo apt install -y python3-pip
+RUN apt-get install -y python3-pip
 
 RUN pip install pandas
 
