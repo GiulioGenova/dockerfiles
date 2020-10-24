@@ -6,15 +6,14 @@ RUN : \
         software-properties-common \
     && add-apt-repository -y ppa:deadsnakes \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        python3.8-venv \
+        python3.8 \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
     && :
 
 # following instructions here https://github.com/cdr/code-server/blob/v3.5.0/doc/install.md
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN apt-get install -y --no-install-recommends pip3
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends python3-pip
 
 RUN pip install pandas
 
