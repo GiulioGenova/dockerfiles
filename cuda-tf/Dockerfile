@@ -37,6 +37,7 @@ RUN python --version
 
 RUN pip3 install tensorflow
 
+RUN pip3 install -U scikit-learn
 
 # VSCODE
 RUN curl -fsSL https://code-server.dev/install.sh | sh
