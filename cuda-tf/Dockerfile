@@ -16,10 +16,11 @@ RUN : \
 
 RUN : \
     && add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable \
-    && apt update
-    && apt upgrade
+    && apt update \
+    && apt upgrade \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-       libudunits2-dev python-numpy gdal-bin libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev
+       libudunits2-dev python-numpy gdal-bin libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev \
+    && :
 
 RUN python3.8 -m venv /venv
 ENV PATH=/venv/bin:$PATH
