@@ -16,8 +16,8 @@ RUN : \
 
 RUN : \
     && add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable \
-    && apt update \
-    && apt upgrade \
+    && apt -y update \
+    && apt -y upgrade \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
        libudunits2-dev python-numpy gdal-bin libgdal-dev libgeos-dev libproj-dev libfontconfig1-dev \
     && :
