@@ -64,6 +64,8 @@ RUN pip3 install xarray
 
 RUN pip3 install "xarray[parallel]"
 
+RUN pip3 install "xarray[io]" 
+
 # VSCODE
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
