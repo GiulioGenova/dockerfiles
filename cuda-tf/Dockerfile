@@ -59,7 +59,7 @@ RUN pip3 install tensorflow
 
 RUN pip3 install -U scikit-learn
 
-RUN pip3 install xarray
+RUN pip3 install "xarray[complete]"
 
 # VSCODE
 RUN curl -fsSL https://code-server.dev/install.sh | sh
